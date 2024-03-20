@@ -11,8 +11,9 @@ public class Invoice {
 
     @Autowired
     private Client client;
-    @Value("${invoice.description}")
+    @Value("${invoice.description.office}")
     private String description;
+    @Autowired
     private List<Item> items;
 
     public Client getClient() {
@@ -37,5 +38,14 @@ public class Invoice {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+
+    public int getTotal(){
+        int total = 0;
+        for(Item item : items){
+            total += item.getImporte();
+        }
+        return total;
     }
 }
